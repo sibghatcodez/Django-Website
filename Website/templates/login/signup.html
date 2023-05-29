@@ -1,0 +1,105 @@
+{% extends 'login/base.html' %}
+
+{%block title%} sibghatcodez | Sign Up{% endblock %}
+
+  {% block css %}
+  {{ block.super }}
+  <style>
+    /* Form styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+    .form {
+      margin: 50px auto;
+      padding: 20px;
+      width: 400px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    }
+    .form h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .form input[type=text], .form input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 2px solid #ccc;
+    }
+    .form input[type=text]:focus, .form input[type=password]:focus {
+      border-bottom: 2px solid #4CAF50;
+    }
+    .form button[type=submit] {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .form button[type=submit]:hover {
+      background-color: #3e8e41;
+    }
+
+    /* Gradient background */
+    body {
+      background: linear-gradient(100deg, #ddd6f3 0%, #faaca8 100%);
+    }
+
+    /* Animations */
+    .form input[type=text], .form input[type=password], .form button[type=submit] {
+      animation-name: slide-in-bottom;
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: forwards;
+    }
+    @keyframes slide-in-bottom {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  </style>
+  {% endblock %}
+
+  {% block content %}
+      <div class="form">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="post">
+            {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+
+    <label for="lastname">Last Name</label>
+    <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Enter your em@il" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+
+    <button type="submit">Sign Up</button>
+    </form>
+    </div>
+    {% endblock %}
+

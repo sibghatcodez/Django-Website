@@ -1,0 +1,168 @@
+{%extends 'login/base.html'%}
+
+{%block title%} sibghatcodez | To-do list {%endblock%}
+
+    {%block css%}
+    <style>
+        body {
+            background: linear-gradient(100deg, #ddd6f3 0%, #faaca8 100%);
+            font-family: Arial, sans-serif;
+        }
+        *{
+            margin: 0;
+        }
+        .container{
+            height: 50vh;
+            width: 70vw;
+            margin: 100px auto;
+            border: 5px solid #313131b2;
+            border-radius: 10px;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            text-align: center;
+            margin: auto;
+            width: 30vw;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            /* display: inline-block; */
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        .list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+       .list li {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid rgb(56, 56, 56);
+        }
+
+        .list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .delete {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .delete:hover {
+            background-color: #d32f2f;
+        }
+
+        .edit {
+            background-color: #bbbbbbec;
+            color: #1d1d1df3;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .edit:hover {
+            background-color: #868686c2;
+        }
+        .date{
+            background-color: #c7c4c42f;
+            font-size: 15px;
+            border: none;
+            margin: 0;
+        }
+    </style>
+{%endblock%}
+
+{% block content %}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1>{{first_name}}'s Todo List</h1>
+        {% else %}
+        <h1>Todo List</h1>
+        {% endif %}
+        <form method="POST" action="newlist" onsubmit="return validateList()">
+            {% csrf_token %}
+            <input type="text" name="new_list" id="new_list" class="sticky" placeholder="Add your new todo.">
+            <button type="submit" class="sticky">Add</button>
+        </form>
+        <div class="list">
+            <ul>
+                {% for item in all_lists %}
+                <li>
+                    {{ item.todo_list }} 
+                    <p class="date">{{item.date}}</p>
+                </li>
+                <a href="{% url 'updatelist' item.id %}" class="edit">Edit</a>
+                <a href="{% url 'delete_list' item.id %}" class="delete">Delete</a> <br><br><br>
+                {% empty %}
+                <h1>You don't have anything to do.</h1>
+                {% endfor %}
+            </ul>
+        </div>        
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        function validateList() {
+            const listInput = document.getElementById('new_list');
+            const errorMessage = document.getElementById('error-message');
+
+            if (listInput.value === '') {
+                listInput.placeholder = 'Error: List cannot be empty.';
+                listInput.style.transition = 'all 2s';
+                setTimeout(() => {
+                    listInput.placeholder = 'Add your new todo';
+                }, 2000);
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

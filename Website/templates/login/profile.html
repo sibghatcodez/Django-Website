@@ -1,0 +1,44 @@
+{%extends 'login/base.html'%}
+
+{%block title %} sibghatcodez | User Info {%endblock%}
+{%block css%}
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: linear-gradient(100deg, #ddd6f3 0%, #faaca8 100%);
+		}
+		h1 {
+			text-align: center;
+			font-size: 32px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			color: #666;
+		}
+		.user-info {
+			background-color: #fff;
+			padding: 20px;
+			box-shadow: 0 0 5px #ccc;
+			border-radius: 5px;
+			width: 500px;
+			margin: 0 auto;
+		}
+		.user-info p {
+			font-size: 18px;
+			margin-bottom: 10px;
+			color: #333;
+		}
+		.user-info strong {
+			font-weight: bold;
+		}
+	</style>
+    {%endblock%}
+    {%block content%}
+    {%csrf_token%}
+	<h1>{{username}}'s Profile</h1>
+	<div class="user-info">
+		<p><strong>Username:</strong> <span id="username">{{username}}</span></p>
+		<p><strong>First Name:</strong> <span id="first_name">{{first_name}}</span></p>
+		<p><strong>Last Name:</strong> <span id="last_name">{{last_name}}</span></p>
+		<p><strong>Email:</strong> <span id="email">{{email}}</span></p>
+	</div>
+    {%endblock%}

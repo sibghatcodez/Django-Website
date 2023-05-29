@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}sibghatcodez | DjangoWeb {% endblock %}</title>  
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">  
+    <style>
+        body{
+            margin: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.281),rgba(0, 0, 0, 0.178)), url("/static/login/bgnew.jpg") no-repeat center center fixed;
+            position: relative;
+        }
+        *{
+            margin: 0;
+        }
+        nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #404258;
+            height: 10vh;
+        }
+        .logo h1{
+            color: aliceblue;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding: 10px 10px;
+        }
+        .logo h1:hover{
+            background-color: rgba(224, 224, 224, 0.1);
+            border-radius: 10px;
+        }
+        .menu li{
+            list-style: none;
+            display: inline-block;
+        }
+        .menu li a{
+            text-decoration: none;
+            color: #F7C04A;
+            padding: 5px 20px;
+            font-size: larger;
+            font-family: cursive;
+        }
+        #signout{
+            color: white;
+        }
+        .menu li a:hover{
+            background-color: rgba(224, 224, 224, 0.2);
+            border-radius: 10px;
+        }
+
+
+        /* Center the search box */
+.searchBar{
+position: absolute;
+right: 0;
+margin-top: 5px;
+margin-bottom: 10px;
+}
+
+/* Style the search box input */
+.searchBar input[type="text"] {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Add a hover effect to the search box input */
+.searchBar input[type="text"]:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.searchBar button[type="submit"] {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.searchBar button[type="submit"]:hover {
+    background-color: #0069d9;
+    transform: translateY(-5px);
+}
+
+.searchBar button[type="submit"] i {
+  margin-right: 5px;
+}
+
+
+        </style>
+            {%block css%}
+            {%endblock%} 
+
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <h1>sibghatcodez</h1>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="todo/todolist">To-do</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/signout" id="signout">Sign Out</a></li>
+                {% else %}
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/signin">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <form class="searchBar">
+        <input type="text" placeholder="Search...">
+        <button type="submit"><i class="fas fa-search">Search</i></button>
+      </form>
+      
+      
+      
+      {%block content%}
+      {%endblock%}
+      
+      {%block script%}
+      <script>
+        </script>
+        {%endblock%}
+</body>
+</html>
